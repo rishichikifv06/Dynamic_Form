@@ -1,6 +1,8 @@
-import logo from "./logo.svg";
-import "./App.css";
-import DynamicForm from "./Component/DynamicForm";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import DynamicForm from "./Component/DynamicForm"; // Import your component
+import Home from "./Component/Home"; // Example home component
+import FormBuilder from "./Component/FormBuilder";
+
 // Modified formFields to include canAddMultiple property for each section
 
 const formFields = {
@@ -202,10 +204,17 @@ const formFields = {
 
 function App() {
   console.log(formFields);
+
   return (
-    <div className="App">
-      {formFields && <DynamicForm formFields={formFields} />}
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/FormBuilder" element={<FormBuilder />} />
+          <Route path="/" element={formFields ? <DynamicForm formFields={formFields} /> : <p>Loading...</p>} />
+  
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
